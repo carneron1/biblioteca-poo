@@ -16,7 +16,7 @@ int main()
     enc.push_back(Persona("Maxi", 33273886, Ubicacion("Ibiza 162", "2235918574", "Maxi@bib.com", 7609)));
     enc.push_back(Persona("Tino", 32345252, Ubicacion("salta 1218", "2235918544", "tino@bib.com", 7609)));
     Biblioteca bib("Ing UNMDP", Ubicacion("JB justo 4300", "2235321654", "lib@unmdp.com", 7600),enc);
-    Menu menu;
+    Menu menu(&bib);
 
 
     try{
@@ -25,8 +25,8 @@ int main()
         bib.ingresarEjemplar(d1);
         bib.alquilerEjemplar(111,true,Fecha(10,10,2001),"VALEN", enc.back());
 
-        menu.preMenu(bib);
-        menu.menuPrincipal(bib);
+        menu.preMenu();
+        menu.menuPrincipal();
 
 
 

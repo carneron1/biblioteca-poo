@@ -19,34 +19,35 @@ class Menu
     public:
         /** Default constructor */
         Menu();
+        Menu(Biblioteca *bib);
         /** Default destructor */
         virtual ~Menu();
         void limpiarPantalla();
 
-        void preMenu(Biblioteca &bib);
+        void preMenu();
 
-        void menuPrincipal(Biblioteca  &bib);
+        void menuPrincipal();
 
-        void menuAlquileres(Biblioteca &bib);
-        void alquilerEjemplar(Biblioteca &bib);
-        void devolverEjemplar(Biblioteca &bib);
-        void subMenuAlquileres1(Biblioteca &bib,uint32_t);
-        void subMenuAlquileres2(Biblioteca &bib, uint32_t numCatalogoAux);
-        void listadoAlquilados(Biblioteca &bib);
+        void menuAlquileres();
+        void alquilerEjemplar();
+        void devolverEjemplar();
+        void subMenuAlquileres1(uint32_t);
+        void subMenuAlquileres2(uint32_t numCatalogoAux);
+        void listadoAlquilados();
 
-        void menuListado(Biblioteca &bib);
+        void menuListado();
 
-        void menuEjemplares(Biblioteca  &bib);
-        Ejemplar* ingresaEjemplar(Biblioteca &bib);
-        Libro* ingresarLibro(Biblioteca &bib);
-        Revista* ingresarRevista(Biblioteca &bib);
-        Dvd* ingresarDvd(Biblioteca &bib);
-        Apunte * ingresarApunte(Biblioteca &bib);
+        void menuEjemplares();
+        Ejemplar* ingresaEjemplar();
+        Libro* ingresarLibro();
+        Revista* ingresarRevista();
+        Dvd* ingresarDvd();
+        Apunte * ingresarApunte();
 
-        void menuBiblioteca(Biblioteca &bib);
-        void modificarNombre(Biblioteca &bib);
-        void modificarUbicacion(Biblioteca &bib);
-        void agregarEncargado(Biblioteca &bib);
+        void menuBiblioteca();
+        void modificarNombre();
+        void modificarUbicacion();
+        void agregarEncargado();
 
 
 
@@ -54,6 +55,7 @@ class Menu
     protected:
 
     private:
+        Biblioteca *bib;
 };
 
 #endif // MENU_H

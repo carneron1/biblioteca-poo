@@ -69,7 +69,7 @@ bool Fecha:: confFechaValida()
                     return confFechaFuturo();
         }
 
-        else;
+        else
         {
             cout<< "FECHA NO VALIDA";
             return false;

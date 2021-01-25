@@ -1,9 +1,16 @@
 #include "Menu.h"
 
-Menu::Menu()
-{
-    //ctor
+
+Menu::Menu(){
+
 }
+
+Menu::Menu(Biblioteca *b){
+
+    bib = b;
+
+}
+
 
 Menu::~Menu()
 {
@@ -19,19 +26,19 @@ void Menu :: limpiarPantalla()
 #endif
 }
 
-void Menu:: preMenu(Biblioteca &bib)
+void Menu:: preMenu()
 {
     int aux;
-    bib.listarEncargados();
+    bib->listarEncargados();
     Persona pAux;
     cout<<endl<<"Seleccione el encargado actual: ";
     do
     {
         cin >>aux;
-        if (aux<bib.getCantEncargados())
+        if (aux<bib->getCantEncargados())
         {
-            pAux= bib.getEncargado(aux);
-            bib.SetEncargadoActual(pAux);
+            pAux= bib->getEncargado(aux);
+            bib->SetEncargadoActual(pAux);
             limpiarPantalla();
             cout<<"BIENVENIDO/A "<<pAux.Getnombre()<<endl;
 
@@ -42,12 +49,12 @@ void Menu:: preMenu(Biblioteca &bib)
         }
 
     }
-    while (aux > bib.getCantEncargados()-1);
+    while (aux > bib->getCantEncargados()-1);
             system("pause");
     limpiarPantalla();
 }
 
-void Menu:: menuPrincipal(Biblioteca  &bib)
+void Menu:: menuPrincipal()
 {
     limpiarPantalla();
 
@@ -55,12 +62,12 @@ void Menu:: menuPrincipal(Biblioteca  &bib)
 	while (opcion != 7)
 	{
 
-	    cout << "\n*** BIBLIOTECA "<< bib.Getnombre()<<"***\n";
-	    cout << bib.Getubicacion()<<endl;
-        cout << "Cantidad de ejemplares registrados: "<<bib.GetcantEjemplares()<<endl;
-        cout << "Cantidad de ejemplares alquilados: "<<bib.cantAlquilados()<<endl;
+	    cout << "\n*** BIBLIOTECA "<< bib->Getnombre()<<"***\n";
+	    cout << bib->Getubicacion()<<endl;
+        cout << "Cantidad de ejemplares registrados: "<<bib->GetcantEjemplares()<<endl;
+        cout << "Cantidad de ejemplares alquilados: "<<bib->cantAlquilados()<<endl;
         cout << "\n*** ENCARGADO  ACTUAL***\n"<<endl;
-        cout<<bib.GetEncargadoActual()<<endl;
+        cout<<bib->GetEncargadoActual()<<endl;
 
 
         cout << "\n*** MENU ***\n";
@@ -79,7 +86,7 @@ void Menu:: menuPrincipal(Biblioteca  &bib)
 
 		    limpiarPantalla();
             cout << "1. Alquileres: " << endl;
-            menuAlquileres(bib);
+            menuAlquileres();
 
 
 			break;
@@ -87,20 +94,20 @@ void Menu:: menuPrincipal(Biblioteca  &bib)
 
 		    limpiarPantalla();
 		    cout << "2. Lista de Ejemplares: " << endl;
-		    menuListado(bib);
+		    menuListado();
 
 			break;
 
 		case 3:
 
-		    menuEjemplares(bib);
+		    menuEjemplares();
 
 			break;
 
 		case 4:
 
 		    limpiarPantalla();
-		    menuBiblioteca(bib);
+		    menuBiblioteca();
 
 			break;
 
@@ -118,7 +125,7 @@ void Menu:: menuPrincipal(Biblioteca  &bib)
 }
 
 
-void Menu::menuAlquileres(Biblioteca &bib)
+void Menu::menuAlquileres()
 {
     uint16_t opcion=0;
 
@@ -139,14 +146,14 @@ void Menu::menuAlquileres(Biblioteca &bib)
         case 1:
 
             limpiarPantalla();
-            alquilerEjemplar(bib);
+            alquilerEjemplar();
 
 
             break;
         case 2:
 
             limpiarPantalla();
-            listadoAlquilados(bib);
+            listadoAlquilados();
             break;
 
         case 3:
@@ -155,7 +162,7 @@ void Menu::menuAlquileres(Biblioteca &bib)
             cout<<"Ingrese numero de catalogo: ";
             cin>>nCat;
             try{
-                bib.historialAlquileres(nCat);
+                bib->historialAlquileres(nCat);
             }catch ( const char * e){
                 cout<<e<<endl;
             };
@@ -180,11 +187,11 @@ void Menu::menuAlquileres(Biblioteca &bib)
     }
 
 }
-void Menu:: listadoAlquilados(Biblioteca &bib)
+void Menu:: listadoAlquilados()
 {
-    bib.listarAlquilados();
+    bib->listarAlquilados();
 }
-void Menu::alquilerEjemplar(Biblioteca &bib)
+void Menu::alquilerEjemplar()
 {
     bool auxbool;
     uint32_t nC;
@@ -192,14 +199,15 @@ void Menu::alquilerEjemplar(Biblioteca &bib)
     cout<<"Numero de catalogo"<<endl;
     cin>>nC;
     try{
-        auxbool= bib.vencimientoAlquiler(nC);
+        auxbool= bib->vencimientoAlquiler(nC);
         if(auxbool==true)  //si se encuentra alquilado
         {
-            subMenuAlquileres1(bib, nC);
+            subMenuAlquileres1(nC);
+
         }
         else // si no esta alquilado
         {
-            subMenuAlquileres2(bib,nC);
+            subMenuAlquileres2(nC);
         }
     }catch(const char* e){
         cout<<e<<endl;
@@ -207,20 +215,20 @@ void Menu::alquilerEjemplar(Biblioteca &bib)
 
 }
 
-void Menu::devolverEjemplar(Biblioteca &bib)
+void Menu::devolverEjemplar()
 {
 
     uint32_t nC;
     cout<<"Ingrese numero de catalogo"<<endl;
     cin>>nC;
     try{
-        bib.alquilerEjemplar(nC);
+        bib->alquilerEjemplar(nC);
     }catch(const char* e){
         cout<<e<<endl;
     }
 
 }
-void Menu:: subMenuAlquileres1(Biblioteca &bib, uint32_t numCatalogoAux)// si el libro esta alquilado
+void Menu:: subMenuAlquileres1(uint32_t numCatalogoAux)// si el libro esta alquilado
 {
 	    int aux;
     while (aux != 8)
@@ -232,7 +240,7 @@ void Menu:: subMenuAlquileres1(Biblioteca &bib, uint32_t numCatalogoAux)// si el
 		switch (aux)
 		{
 		case 1:
-            bib.alquilerEjemplar(numCatalogoAux);
+            bib->alquilerEjemplar(numCatalogoAux);
             cout<<endl<<endl<<"Se finalizo el alquiler"<<endl;
 
 			break;
@@ -248,7 +256,7 @@ void Menu:: subMenuAlquileres1(Biblioteca &bib, uint32_t numCatalogoAux)// si el
 	}
 
 }
-void Menu:: subMenuAlquileres2(Biblioteca &bib, uint32_t nC)// si el libro no esta alquilado
+void Menu:: subMenuAlquileres2(uint32_t nC)// si el libro no esta alquilado
 {
     int aux;
     string cliente;
@@ -281,7 +289,7 @@ void Menu:: subMenuAlquileres2(Biblioteca &bib, uint32_t nC)// si el libro no es
 
 
 
-            bib.alquilerEjemplar(nC,true,fechaaux,cliente, Persona("Maxi", 33273886, Ubicacion()));
+            bib->alquilerEjemplar(nC,true,fechaaux,cliente, Persona("Maxi", 33273886, Ubicacion()));
             cout<<endl<<endl<<"Se alquilo el libro a :"<<cliente<<endl;
             break;
         case 8:
@@ -296,7 +304,7 @@ void Menu:: subMenuAlquileres2(Biblioteca &bib, uint32_t nC)// si el libro no es
 
 
 }
-void Menu::menuEjemplares(Biblioteca &bib)
+void Menu::menuEjemplares()
 {
     int opcion=0;
     uint32_t n;
@@ -318,7 +326,7 @@ void Menu::menuEjemplares(Biblioteca &bib)
 
             limpiarPantalla();
             try{
-                bib.ingresarEjemplar(ingresaEjemplar(bib));
+                bib->ingresarEjemplar(ingresaEjemplar());
             }catch (const char* e){
                 cout<<e<<endl;
             }
@@ -332,7 +340,7 @@ void Menu::menuEjemplares(Biblioteca &bib)
             cout<<"Numero de catalogo a eliminar: ";
             cin>>n;
             try{
-                bib.eliminarEjemplar(n);
+                bib->eliminarEjemplar(n);
             }catch(const char *e){
                 cout<<e<<endl;
             }
@@ -346,7 +354,7 @@ void Menu::menuEjemplares(Biblioteca &bib)
             cin>>n;
             cin.ignore();
             try{
-                bib.imprimir(n);
+                bib->imprimir(n);
 
             }catch(const char *e){
                 cout<<e<<endl;
@@ -372,7 +380,7 @@ void Menu::menuEjemplares(Biblioteca &bib)
 
 }
 
-void Menu::menuListado(Biblioteca &bib)
+void Menu::menuListado()
 {
     int opcion=0;
     string tipo;
@@ -477,7 +485,7 @@ void Menu::menuListado(Biblioteca &bib)
         }
 
         if((orden!='x')&&(tipo!="vacio")&&(opcion!=8)){
-            bib.listarEjemplares(tipo,orden);
+            bib->listarEjemplares(tipo,orden);
             system("pause");
 
         }
@@ -489,7 +497,7 @@ void Menu::menuListado(Biblioteca &bib)
 
 }
 
-Ejemplar* Menu::ingresaEjemplar(Biblioteca &bib){
+Ejemplar* Menu::ingresaEjemplar(){
 
     int opcion=0;
     string tipo;
@@ -509,35 +517,35 @@ Ejemplar* Menu::ingresaEjemplar(Biblioteca &bib){
     if (opcion==1){
 
         limpiarPantalla();
-        Libro *libro = ingresarLibro(bib);
+        Libro *libro = ingresarLibro();
         return libro;
     }
 
         else if (opcion==2){
 
         limpiarPantalla();
-        Revista *revista = ingresarRevista(bib);
+        Revista *revista = ingresarRevista();
         return revista;
     }
 
     else if (opcion==3){
 
         limpiarPantalla();
-        Dvd * dvd = ingresarDvd(bib);
+        Dvd * dvd = ingresarDvd();
         return dvd;
     }
 
         else {
 
         limpiarPantalla();
-        Apunte * apunte= ingresarApunte(bib);
+        Apunte * apunte= ingresarApunte();
 
         return apunte;
 
     }
 }
 
-Libro* Menu:: ingresarLibro(Biblioteca &bib)
+Libro* Menu:: ingresarLibro()
 {
         string tipo="Libro";
         string autor;
@@ -575,7 +583,7 @@ Libro* Menu:: ingresarLibro(Biblioteca &bib)
         cout<<"Titulo: ";
         getline(cin, titulo);
         cout<<endl;
-        cout<<"Numero de catalogo (recomendado: "<<bib.GetcantEjemplares()+1 <<"): ";
+        cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
         cin>>numCatalogo;
         cout<<endl;
         cin.ignore();
@@ -601,7 +609,7 @@ Libro* Menu:: ingresarLibro(Biblioteca &bib)
         return libro;
 }
 
-Revista* Menu:: ingresarRevista(Biblioteca &bib)
+Revista* Menu:: ingresarRevista()
 {
         string tipo="Revista";
         string volumen;
@@ -630,7 +638,7 @@ Revista* Menu:: ingresarRevista(Biblioteca &bib)
         cout<<"Titulo: ";
         getline(cin, titulo);
         cout<<endl;
-        cout<<"Numero de catalogo (recomendado: "<<bib.GetcantEjemplares()+1 <<"): ";
+        cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
         cin>>numCatalogo;
         cout<<endl;
         cin.ignore();
@@ -656,7 +664,7 @@ Revista* Menu:: ingresarRevista(Biblioteca &bib)
         return revista;
 }
 
-Dvd* Menu:: ingresarDvd(Biblioteca &bib)
+Dvd* Menu:: ingresarDvd()
 {
         string tipo="Dvd";
         string genero;
@@ -681,7 +689,7 @@ Dvd* Menu:: ingresarDvd(Biblioteca &bib)
         cout<<"Titulo: ";
         getline(cin, titulo);
         cout<<endl;
-        cout<<"Numero de catalogo (recomendado: "<<bib.GetcantEjemplares()+1 <<"): ";
+        cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
         cin>>numCatalogo;
         cout<<endl;
         cin.ignore();
@@ -711,7 +719,7 @@ Dvd* Menu:: ingresarDvd(Biblioteca &bib)
         return dvd;
 }
 
-Apunte * Menu:: ingresarApunte(Biblioteca &bib)
+Apunte * Menu:: ingresarApunte()
 {
         string tipo="Apunte";
         string area;
@@ -736,7 +744,7 @@ Apunte * Menu:: ingresarApunte(Biblioteca &bib)
         cout<<"Titulo: ";
         getline(cin, titulo);
         cout<<endl;
-        cout<<"Numero de catalogo (recomendado: "<<bib.GetcantEjemplares()+1 <<"): ";
+        cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
         cin>>numCatalogo;
         cout<<endl;
         cin.ignore();
@@ -764,7 +772,7 @@ Apunte * Menu:: ingresarApunte(Biblioteca &bib)
         return apunte;
 }
 
-void Menu::menuBiblioteca(Biblioteca &bib)
+void Menu::menuBiblioteca()
 {
     uint16_t opcion=0;
 
@@ -785,20 +793,20 @@ void Menu::menuBiblioteca(Biblioteca &bib)
         case 1:
 
             limpiarPantalla();
-            modificarNombre(bib);
+            modificarNombre();
 
 
             break;
         case 2:
 
             limpiarPantalla();
-            modificarUbicacion(bib);
+            modificarUbicacion();
 
             break;
 
         case 3:
 
-            agregarEncargado(bib);
+            agregarEncargado();
 
             break;
 
@@ -821,17 +829,17 @@ void Menu::menuBiblioteca(Biblioteca &bib)
 
 }
 
-void Menu::modificarNombre(Biblioteca &bib){
+void Menu::modificarNombre(){
 
     string nombre;
     cout<<"Ingrese nombre: ";
     cin.ignore();
     getline(cin, nombre);
-    bib.Setnombre(nombre);
+    bib->Setnombre(nombre);
 
 }
 
-void Menu::modificarUbicacion(Biblioteca &bib){
+void Menu::modificarUbicacion(){
 
     string direccion;
     string telefono;
@@ -846,11 +854,11 @@ void Menu::modificarUbicacion(Biblioteca &bib){
     getline(cin, email);
     cout<<"Ingrese codigo postal: ";
     cin>>codPostal;
-    bib.Setubicacion(Ubicacion(direccion, telefono, email, codPostal));
+    bib->Setubicacion(Ubicacion(direccion, telefono, email, codPostal));
 
 }
 
-void Menu::agregarEncargado(Biblioteca &bib){
+void Menu::agregarEncargado(){
 
 
     string nombre;
@@ -872,7 +880,7 @@ void Menu::agregarEncargado(Biblioteca &bib){
     cin>>codPostal;
     cout<<"Ingrese DNI: ";
     cin>>dni;
-    bib.agregarEncargado(Persona(nombre, dni, Ubicacion(direccion, telefono, email, codPostal)));
+    bib->agregarEncargado(Persona(nombre, dni, Ubicacion(direccion, telefono, email, codPostal)));
 
 }
 
