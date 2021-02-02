@@ -12,25 +12,29 @@ class Persona
         Persona();
         Persona(string, uint32_t, Ubicacion);
         virtual ~Persona();
-        string nombre;
 
         string Getnombre() { return nombre; }
         void Setnombre(string val) { nombre = val; }
 
-        uint16_t Getdni() { return dni; }
-        void Setdni(uint16_t val) { dni = val; }
+        uint32_t Getdni() { return dni; }
+        void Setdni(uint32_t val) { dni = val; }
 
         Ubicacion Getubicacion() { return ubpers; }
-        void Setnombre(Ubicacion val) { ubpers = val; }
-
+        void Setubicacion(Ubicacion val) { ubpers = val; }
         friend ostream& operator<<(ostream& , const Persona& );
+        vector<uint32_t> GetNcatalogos(){return nCatalogos;};
+        void setNcatalogos(vector<uint32_t> val){nCatalogos = val;}
+        ostream& guardar();
+
+
     protected:
 
     private:
-        vector<uint32_t> nCatalogos; //libros alquilados
-
-        uint32_t dni;
         Ubicacion ubpers;
+        vector<uint32_t> nCatalogos; //libros alquilados
+        uint32_t dni;
+        string nombre;
+
 };
 
 #endif // PERSONA_H

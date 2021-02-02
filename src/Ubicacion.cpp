@@ -23,3 +23,11 @@ ostream& operator<<(ostream& os, const Ubicacion& dt)
     os<< dt.email<< " Codigo postal: " << dt.codpostal<<endl;
     return os;
 }
+
+ostream& Ubicacion:: guardar(){
+
+    ostream& os = cout;
+    os<<direccion.c_str()<<endl<<telefono.c_str()<<endl<<to_string(codpostal)<<endl<<email.c_str()<<endl;
+    return os;
+
+}

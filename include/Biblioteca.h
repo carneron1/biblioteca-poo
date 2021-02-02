@@ -10,6 +10,10 @@
 #include "Ubicacion.h"
 #include "Persona.h"
 #include "Alquiler.h"
+#include "Libro.h"
+#include "Revista.h"
+#include "Dvd.h"
+#include "Apunte.h"
 
 using namespace std;
 
@@ -25,7 +29,7 @@ class Biblioteca
         * @param: string nombre de la biblioteca, ubicacion, vector de encargados
         * @retunr: -
         */
-        Biblioteca(string, Ubicacion, vector<Persona>);
+        Biblioteca(string, Ubicacion);
         virtual ~Biblioteca();
 
         /* Setters y Getters*/
@@ -43,6 +47,9 @@ class Biblioteca
         void Setcatalogo(map<uint32_t, Ejemplar*> val) { catalogo = val; }
         map<uint32_t, Alquiler*> Getalquileres() { return alquileres; }
         void Setalquileres(map<uint32_t, Alquiler*> val) { alquileres = val; }
+        map<uint32_t, Persona*> Getclientes() { return clientes; }
+        void Setcclientes(map<uint32_t, Persona*> val) { clientes = val; }
+        Persona* getCliente(uint32_t indice);
         Persona getEncargado(int indice);
         int getCantEncargados();
 
@@ -75,7 +82,7 @@ class Biblioteca
                  Persona: Encargado a cargo del alquiler
         * @retunr: -
         */
-        void alquilerEjemplar(uint32_t, bool, Fecha, string, Persona);
+        void alquilerEjemplar(uint32_t, bool, Fecha, uint32_t dni, Persona);
 
         /*! Method
         *  devolucion de un ejemplar setea el atributo alquilado en false
@@ -140,8 +147,14 @@ class Biblioteca
         * @param: -
         * @retunr: -
         */
-        void listarEncargados();
 
+        void agregarCliente(Persona* _cliente);
+
+        void listarEncargados();
+        void guardar();
+        void cargaEjemplares();
+        void cargaEncargados();
+        void cargaClientes();
     protected:
 
     private:
@@ -149,6 +162,7 @@ class Biblioteca
         string nombre;
         Ubicacion ubicacion;
         vector<Persona> encargados;
+        map<uint32_t, Persona*> clientes;
         Persona encargadoActual;
         uint32_t cantEjemplares=0;
         map<uint32_t, Ejemplar*> catalogo;

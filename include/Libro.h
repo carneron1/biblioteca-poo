@@ -48,12 +48,14 @@ class Libro : public Ejemplar
 
         void cargarDatos();
 
+        ostream& guardar();
+
     protected:
 
     private:
+        uint16_t cantPaginas; //!< Member variable "cantPaginas"
         string autor; //!< Member variable "autor"
         string isbn; //!< Member variable "isbn"
-        uint16_t cantPaginas; //!< Member variable "cantPaginas"
         string pais; //!< Member variable "pais"
         string genero; //!< Member variable "genero"
         string encuadernacion;

@@ -28,6 +28,10 @@ void Menu :: limpiarPantalla()
 
 void Menu:: preMenu()
 {
+    bib->cargaEncargados();
+    bib->cargaEjemplares();
+    bib->cargaClientes();
+    //bib->alquilerEjemplar(111,true,Fecha(10,10,2001),37321654, Persona("Encargado", 37321654, Ubicacion("luro 118", "2235918544", "maxi@c.com", 7609)));
     int aux;
     bib->listarEncargados();
     Persona pAux;
@@ -121,6 +125,7 @@ void Menu:: menuPrincipal()
 		}
 
 	}
+    bib->guardar();
 
 }
 
@@ -259,7 +264,7 @@ void Menu:: subMenuAlquileres1(uint32_t numCatalogoAux)// si el libro esta alqui
 void Menu:: subMenuAlquileres2(uint32_t nC)// si el libro no esta alquilado
 {
     int aux;
-    string cliente;
+    Persona cliente;
     Fecha fechaaux;
     bool confFecha= true;
     do
@@ -271,8 +276,8 @@ void Menu:: subMenuAlquileres2(uint32_t nC)// si el libro no esta alquilado
         switch (aux)
         {
         case 1:
-            cout<<"Ingrese nombre de cliente: "<<endl;
-            cin>>cliente;
+//            cout<<"Ingrese nombre de cliente: "<<endl;
+//            cin>>cliente;
             cout<<"Ingrese fecha del alquiler (FORMATO dd/mm/aa) :"<<endl;
             do
             {
@@ -289,7 +294,7 @@ void Menu:: subMenuAlquileres2(uint32_t nC)// si el libro no esta alquilado
 
 
 
-            bib->alquilerEjemplar(nC,true,fechaaux,cliente, Persona("Maxi", 33273886, Ubicacion()));
+            bib->alquilerEjemplar(nC,true,fechaaux, 37321654, bib->Getencargados().back());
             cout<<endl<<endl<<"Se alquilo el libro a :"<<cliente<<endl;
             break;
         case 8:

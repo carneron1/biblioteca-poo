@@ -31,13 +31,14 @@ class Revista : public Ejemplar
         * @retunr: -
         */
         void imprime (char sentido);
+        ostream& guardar();
 
     protected:
 
     private:
+        bool referato; //Se guarda en archivo como uint8 = 0 false, uint8 = 1 true
         string volumen;
         string issn;
-        bool referato;
 };
 
 #endif // REVISTA_H

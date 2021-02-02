@@ -42,3 +42,16 @@ void Dvd:: imprime(char completo)
         cout<< "Duracion: "<< Getduracion()<<"min"<<endl;
     }
 }
+
+
+ostream& Dvd::guardar(){
+
+    ostream &os = anioEdicion.guardar();
+    //heredado
+    os<<tipo.c_str()<<endl<<titulo.c_str()<<endl<<to_string(numCatalogo)<<endl<<editorial.c_str()<<endl<<idioma.c_str()<<endl;
+    //específico
+    os<<to_string(duracion)<<endl<<genero.c_str()<<endl<<subtitulos.c_str()<<endl;
+
+    return os;
+
+}

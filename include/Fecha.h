@@ -26,6 +26,7 @@ class Fecha
 
         friend ostream& operator<<(ostream& os, const Fecha& dt);
         friend istream& operator >>(istream& is,Fecha& f);
+        ostream& guardar();
     protected:
 
     private:

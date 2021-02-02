@@ -30,6 +30,7 @@ class Apunte : public Ejemplar
         * @retunr: -
         */
         void imprime (char sentido);
+        ostream& guardar();
 
     protected:
 

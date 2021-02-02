@@ -47,3 +47,19 @@ void Revista:: imprime(char completo)
 
     }
 }
+
+ostream& Revista::guardar(){
+
+    ostream &os = anioEdicion.guardar();
+    //heredado
+    os<<tipo.c_str()<<endl<<titulo.c_str()<<endl<<to_string(numCatalogo)<<endl<<editorial.c_str()<<endl<<idioma.c_str()<<endl;
+    //específico
+    uint16_t refe=0;
+    if (referato==true) refe = 1;
+    else refe = 0;
+
+    os<<refe<<endl<<volumen.c_str()<<endl<<issn.c_str();
+
+    return os;
+
+}

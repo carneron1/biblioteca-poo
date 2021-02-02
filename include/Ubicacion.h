@@ -23,6 +23,8 @@ class Ubicacion
         void Setcodpos(uint16_t val) { codpostal = val; }
 
         friend ostream& operator<<(ostream& os, const Ubicacion& dt);
+        ostream& guardar();
+
     protected:
 
     private:

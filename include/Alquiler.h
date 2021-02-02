@@ -11,7 +11,7 @@ class Alquiler
 {
     public:
         Alquiler();
-        Alquiler (uint16_t, bool);
+        Alquiler (uint16_t, bool, Persona _encargado, Fecha _ultimaFecha);
         virtual ~Alquiler();
 
         uint16_t GetcontadorAlquiler() { return contadorAlquiler; }
@@ -23,25 +23,27 @@ class Alquiler
         Persona GetultimoEncargado() { return ultimoEncargado; }
         void SetultimoEncargado(Persona val) { ultimoEncargado = val; }
 
-        vector<string> GetClientes() { return clientes; }
-        void SetClientes(vector<string> val) { clientes = val; }
+        vector<Persona*> GetClientes() { return clientes; }
+        void SetClientes(vector<Persona*> val) { clientes = val; }
 
         bool Getalquilado() { return alquilado; }
         void Setalquilado(bool val) { alquilado = val; }
-
         bool verVenc();
 
         void infoAlquiler();
 
         friend ostream& operator<<(ostream& os, const Alquiler& a);
+        ostream& guardar();
+
+        void agregaCliente(Persona * _cliente) { clientes.push_back(_cliente);}
 
     protected:
 
     private:
-        vector<string> clientes;
-        uint16_t contadorAlquiler=0;
-        Fecha ultimaFecha;
         Persona ultimoEncargado;
+        vector<Persona*> clientes={};
+        Fecha ultimaFecha;
+        uint16_t contadorAlquiler=0;
         bool alquilado;
 };
 

@@ -31,13 +31,14 @@ class Dvd : public Ejemplar
         * @retunr: -
         */
         void imprime (char sentido);
+        ostream& guardar();
 
     protected:
 
     private:
 
-        string genero;
         uint16_t duracion;
+        string genero;
         string subtitulos;
 };
 

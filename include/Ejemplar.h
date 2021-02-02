@@ -27,14 +27,16 @@ class Ejemplar
         virtual void imprime() = 0;
         virtual void imprime(char) = 0;
 
+        virtual ostream& guardar() = 0;
+
     protected:
 
+        Fecha anioEdicion;
+        string tipo;
         string titulo;
         uint32_t numCatalogo;
         string editorial;
         string idioma;
-        Fecha anioEdicion;
-        string tipo;
 
     private:
 

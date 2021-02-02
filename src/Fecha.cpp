@@ -114,3 +114,10 @@ istream& operator >>(istream& is,Fecha& f)
     }
 
 }
+
+ostream& Fecha::guardar(){
+
+    ostream& os = cout;
+    os<<endl<<dia<<endl<<mes<<endl<<anio<<endl;
+    return os;
+}
