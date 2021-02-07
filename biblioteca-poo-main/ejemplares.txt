@@ -1,0 +1,123 @@
+10
+1
+1
+2021
+Apunte
+Hola mundo
+4
+Casa
+ESP
+156
+Maxi C
+Medicina
+1
+1
+1934
+Libro
+La Iliada
+7
+n
+esp
+500
+La Iliada
+3452562
+grecia
+mitologia
+tapaDura
+17
+10
+2017
+Revista
+Muy Interesante
+8
+muy int
+esep
+0
+1
+1234151
+2
+3
+2010
+Dvd
+127hrs
+9
+univ
+ingles
+234
+accion
+no
+11
+11
+2002
+Revista
+Auto magazine
+10
+Cars world
+ING
+1
+uno
+asd987ttyu
+3
+4
+2002
+Dvd
+The notebook
+11
+warnwe
+ing
+341
+remance
+no
+1
+1
+2013
+Libro
+La casa de los Espiritus
+12
+sudamericana
+esp
+353
+Isabel Allende
+35135
+chile
+Realismo fantstico
+blanda
+10
+10
+2001
+Libro
+IT
+111
+penguin
+ESP
+500
+Stephen King
+2394af532
+EEUU
+Terror
+Pegado
+10
+10
+2004
+Libro
+1984
+112
+OTRA EDITORIAL
+ING
+250
+G. Orwell
+d3425235sg5
+Inglarerra
+Ciencia Ficcion
+COSIDO
+4
+5
+1982
+Dvd
+The Thing
+444
+Universal
+ingles
+120
+Terror
+español, frances
