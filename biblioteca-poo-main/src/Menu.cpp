@@ -76,7 +76,7 @@ bool Menu:: menuPrincipal()
         cout << "    2: Listar Ejemplares" << endl;
         cout << "    3: Opciones Ejemplares" << endl;
         cout << "    4. Opciones Biblioteca" << endl<<endl;
-        cout << "    6: cabiar Encargado" << endl;
+        cout << "    6: Cambiar Encargado" << endl;
         cout << "    7: Salir del programa" << endl;
 
         cin >> opcion;
@@ -296,16 +296,19 @@ void Menu:: subMenuAlquileres2(uint32_t nC)// si el libro no esta alquilado
             }
             } while (conf==false);
 
-            do
-            {
+
+
             cout<< "Ingrese el DNI del cliente: "<<endl;
             cin>> dni;
             conf = bib->verDniCliente(dni);
+            if (conf == false)
+            {
+                subMenuAlquileres2(nC);
             }
-            while(conf == false);
-
-            bib->alquilerEjemplar(nC,true,fechaaux, dni, bib->Getencargados().back());
-
+            else
+            {
+                bib->alquilerEjemplar(nC,true,fechaaux, dni, bib->Getencargados().back());
+            }
             break;
         case 8:
             cout<< "volviendo"<<endl;
@@ -594,7 +597,8 @@ Libro* Menu:: ingresarLibro()
         cout<<"Titulo: ";
         getline(cin, titulo);
         cout<<endl;
-        cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
+        cout<<"Numero de catalogo:  ";
+        //cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
         cin>>numCatalogo;
         cout<<endl;
         cin.ignore();
@@ -649,7 +653,8 @@ Revista* Menu:: ingresarRevista()
         cout<<"Titulo: ";
         getline(cin, titulo);
         cout<<endl;
-        cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
+        cout<<"Numero de catalogo:  ";
+        //cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
         cin>>numCatalogo;
         cout<<endl;
         cin.ignore();
@@ -700,7 +705,8 @@ Dvd* Menu:: ingresarDvd()
         cout<<"Titulo: ";
         getline(cin, titulo);
         cout<<endl;
-        cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
+        cout<<"Numero de catalogo:  ";
+        //cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
         cin>>numCatalogo;
         cout<<endl;
         cin.ignore();
@@ -755,7 +761,8 @@ Apunte * Menu:: ingresarApunte()
         cout<<"Titulo: ";
         getline(cin, titulo);
         cout<<endl;
-        cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
+        cout<<"Numero de catalogo:  ";
+        //cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
         cin>>numCatalogo;
         cout<<endl;
         cin.ignore();
@@ -837,8 +844,6 @@ void Menu::menuBiblioteca()
 
             break;
         }
-        system("pause");
-
 
     }
 

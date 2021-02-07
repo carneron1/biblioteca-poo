@@ -54,7 +54,7 @@ class Menu
         * @retunr: -
         */
 
-        void limpiarMemoria();
+
 
         void menuAlquileres();
 
@@ -127,11 +127,10 @@ class Menu
         void menuBiblioteca();
         void modificarNombre();
         void modificarUbicacion();
+
         void agregarEncargado();
 
-
-
-
+        void limpiarMemoria();
 
     protected:
 

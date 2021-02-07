@@ -1,4 +1,4 @@
-10
+9
 1
 1
 2021
@@ -10,20 +10,6 @@ ESP
 156
 Maxi C
 Medicina
-1
-1
-1934
-Libro
-La Iliada
-7
-n
-esp
-500
-La Iliada
-3452562
-grecia
-mitologia
-tapaDura
 17
 10
 2017
