@@ -697,3 +697,223 @@
 1611716760 source:c:\users\escritorio\desktop\bib\bibapp 2.5\src\menu.cpp
 	"Menu.h"
 
+1612577138 source:c:\users\valen\desktop\biblioteca-poo-main\main.cpp
+	<iostream>
+	"Ejemplar.h"
+	"Libro.h"
+	"Biblioteca.h"
+	"Menu.h"
+	<cstdlib>
+
+1612308070 c:\users\valen\desktop\biblioteca-poo-main\include\ejemplar.h
+	<string>
+	"Fecha.h"
+
+1612308070 c:\users\valen\desktop\biblioteca-poo-main\include\fecha.h
+	<iostream>
+	<ctime>
+
+1612308070 c:\users\valen\desktop\biblioteca-poo-main\include\libro.h
+	<Ejemplar.h>
+	"Persona.h"
+	<string>
+	"Fecha.h"
+
+1612308070 c:\users\valen\desktop\biblioteca-poo-main\include\persona.h
+	<iostream>
+	"Ubicacion.h"
+	<vector>
+
+1612308070 c:\users\valen\desktop\biblioteca-poo-main\include\ubicacion.h
+	<iostream>
+
+1612728805 c:\users\valen\desktop\biblioteca-poo-main\include\biblioteca.h
+	<string>
+	<vector>
+	<map>
+	<algorithm>
+	<iostream>
+	"Ejemplar.h"
+	"Ubicacion.h"
+	"Persona.h"
+	"Alquiler.h"
+	"Libro.h"
+	"Revista.h"
+	"Dvd.h"
+	"Apunte.h"
+
+1612543976 c:\users\valen\desktop\biblioteca-poo-main\include\alquiler.h
+	"Fecha.h"
+	"Persona.h"
+	<iostream>
+	<vector>
+	<ctime>
+
+1612308070 c:\users\valen\desktop\biblioteca-poo-main\include\revista.h
+	<Ejemplar.h>
+
+1612308070 c:\users\valen\desktop\biblioteca-poo-main\include\dvd.h
+	<Ejemplar.h>
+
+1612308070 c:\users\valen\desktop\biblioteca-poo-main\include\apunte.h
+	<Ejemplar.h>
+
+1612634794 c:\users\valen\desktop\biblioteca-poo-main\include\menu.h
+	"Biblioteca.h"
+	"Persona.h"
+	"Fecha.h"
+	"Ubicacion.h"
+	"Ejemplar.h"
+	"Libro.h"
+	"Revista.h"
+	"Dvd.h"
+	"Apunte.h"
+	<iostream>
+	<cstdlib>
+	<string>
+
+1612543976 source:c:\users\valen\desktop\biblioteca-poo-main\src\alquiler.cpp
+	"Alquiler.h"
+
+1612359623 source:c:\users\valen\desktop\biblioteca-poo-main\src\apunte.cpp
+	"Apunte.h"
+
+1612469886 source:c:\users\valen\desktop\biblioteca-poo-main\src\dvd.cpp
+	"Dvd.h"
+
+1612308070 source:c:\users\valen\desktop\biblioteca-poo-main\src\ejemplar.cpp
+	"Ejemplar.h"
+
+1612539361 source:c:\users\valen\desktop\biblioteca-poo-main\src\fecha.cpp
+	"Fecha.h"
+
+1612731214 source:c:\users\valen\desktop\biblioteca-poo-main\src\menu.cpp
+	"Menu.h"
+
+1612731214 source:c:\users\valen\desktop\biblioteca-poo-main\src\biblioteca.cpp
+	"Biblioteca.h"
+	<iterator>
+	<fstream>
+
+1612469435 source:c:\users\valen\desktop\biblioteca-poo-main\src\libro.cpp
+	"Libro.h"
+
+1612308070 source:c:\users\valen\desktop\biblioteca-poo-main\src\persona.cpp
+	"Persona.h"
+
+1612308070 source:c:\users\valen\desktop\biblioteca-poo-main\src\revista.cpp
+	"Revista.h"
+
+1612308070 source:c:\users\valen\desktop\biblioteca-poo-main\src\ubicacion.cpp
+	"Ubicacion.h"
+
+1612741297 source:c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\main.cpp
+	<iostream>
+	"Ejemplar.h"
+	"Libro.h"
+	"Biblioteca.h"
+	"Menu.h"
+	<cstdlib>
+
+1612741297 c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\include\ejemplar.h
+	<string>
+	"Fecha.h"
+
+1612741297 c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\include\fecha.h
+	<iostream>
+	<ctime>
+
+1612741297 c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\include\libro.h
+	<Ejemplar.h>
+	"Persona.h"
+	<string>
+	"Fecha.h"
+
+1612741297 c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\include\persona.h
+	<iostream>
+	"Ubicacion.h"
+	<vector>
+
+1612741297 c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\include\ubicacion.h
+	<iostream>
+
+1612741297 c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\include\biblioteca.h
+	<string>
+	<vector>
+	<map>
+	<algorithm>
+	<iostream>
+	"Ejemplar.h"
+	"Ubicacion.h"
+	"Persona.h"
+	"Alquiler.h"
+	"Libro.h"
+	"Revista.h"
+	"Dvd.h"
+	"Apunte.h"
+
+1612741297 c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\include\alquiler.h
+	"Fecha.h"
+	"Persona.h"
+	<iostream>
+	<vector>
+	<ctime>
+
+1612741297 c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\include\revista.h
+	<Ejemplar.h>
+
+1612741297 c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\include\dvd.h
+	<Ejemplar.h>
+
+1612741297 c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\include\apunte.h
+	<Ejemplar.h>
+
+1612741297 c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\include\menu.h
+	"Biblioteca.h"
+	"Persona.h"
+	"Fecha.h"
+	"Ubicacion.h"
+	"Ejemplar.h"
+	"Libro.h"
+	"Revista.h"
+	"Dvd.h"
+	"Apunte.h"
+	<iostream>
+	<cstdlib>
+	<string>
+
+1612741297 source:c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\src\alquiler.cpp
+	"Alquiler.h"
+
+1612741297 source:c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\src\apunte.cpp
+	"Apunte.h"
+
+1612741297 source:c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\src\biblioteca.cpp
+	"Biblioteca.h"
+	<iterator>
+	<fstream>
+
+1612741297 source:c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\src\dvd.cpp
+	"Dvd.h"
+
+1612741297 source:c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\src\ejemplar.cpp
+	"Ejemplar.h"
+
+1612741297 source:c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\src\fecha.cpp
+	"Fecha.h"
+
+1612741297 source:c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\src\libro.cpp
+	"Libro.h"
+
+1612741297 source:c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\src\menu.cpp
+	"Menu.h"
+
+1612741297 source:c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\src\persona.cpp
+	"Persona.h"
+
+1612741297 source:c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\src\revista.cpp
+	"Revista.h"
+
+1612741297 source:c:\users\escritorio\desktop\biblioteca-poo-tino-edit\biblioteca-poo-main\src\ubicacion.cpp
+	"Ubicacion.h"
+

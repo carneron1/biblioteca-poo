@@ -36,6 +36,7 @@ void Biblioteca::ingresarEjemplar(Ejemplar *e){
                 catalogo.insert({e->GetnumCatalogo(), e});
                 alquileres.insert({e->GetnumCatalogo(), new Alquiler(0,false, GetEncargadoActual(), Fecha(1,1,2000))});
                 cantEjemplares++;
+
             }else throw "Error: Numero de catálogo existente";
         }else throw "Error: Numero de catalogo ya utilizado";
     }catch(const char* e){
@@ -60,43 +61,62 @@ void Biblioteca::eliminarEjemplar(uint32_t e){
     }
 }
 
-void Biblioteca::historialAlquileres(uint32_t e){
+void Biblioteca::historialAlquileres()
+{
 
-    try{
-        if(catalogo.find(e)==catalogo.end()){
+    uint32_t e;
+    cout<<"Ingrese numero de catalogo: ";
+    cin>>e;
+
+    try
+    {
+        if(catalogo.find(e)==catalogo.end())
+        {
             throw "Ejemplar no existente";
-        }else {
+        }
+        else
+        {
             auto it = alquileres.find(e);
             Alquiler *alquiler = it->second;
             vector<Persona*> usuarios = alquiler->GetClientes();
             cout<<"El ejemplar fue alquilado "<<alquiler->GetcontadorAlquiler()<<" veces"<<endl;
             cout<<endl;
             cout<<"***CLIENTES***"<<endl;
-            for (int i = 0; i < usuarios.size(); ++i){
+            for (int i = 0; i < int(usuarios.size()); ++i)
+            {
                 cout<< "Nombre: "<< usuarios[i]->Getnombre()<<endl;
                 cout<< "DNI: " << usuarios[i]->Getdni() <<endl;
                 cout<< usuarios[i]->Getubicacion()<<endl;
 
             }
-
+            system("pause");
 
         }
-    }catch (const char* err){
+    }
+    catch (const char* err)
+    {
         throw;
     }
 
 }
 
-void Biblioteca::alquilerEjemplar(uint32_t numero, bool estado, Fecha fAlquiler, uint32_t clienteDni, Persona enc){
+void Biblioteca::alquilerEjemplar(uint32_t numero, bool estado, Fecha fAlquiler, uint32_t clienteDni, Persona enc)
+{
 
-    try{
-        if(catalogo.find(numero)==catalogo.end()){
+    try
+    {
+        if(catalogo.find(numero)==catalogo.end())
+        {
             throw "Ejemplar no existente";
-        }else {
+        }
+        else
+        {
             auto it = alquileres.find(numero);
             Alquiler *alquiler = it->second;
-            if ((estado == true)&&(alquiler->Getalquilado()==true))throw "Error: El libro ya se encuentra alquilado";
-            else{
+            if ((estado == true)&&(alquiler->Getalquilado()==true))
+                throw "Error: El libro ya se encuentra alquilado";
+            else //se alquila el libro
+            {
                 alquiler->Setalquilado(estado);
                 alquiler->SetultimaFecha(fAlquiler);
                 alquiler->SetultimoEncargado(enc);
@@ -105,23 +125,29 @@ void Biblioteca::alquilerEjemplar(uint32_t numero, bool estado, Fecha fAlquiler,
                 vector<Persona*> auxListado = alquiler->GetClientes();
                 Persona* clienteAux = clientes[clienteDni];
                 vector<uint32_t> catalogoAux;
-                if(alquiler->GetcontadorAlquiler()>0){
+                if(alquiler->GetcontadorAlquiler()>0)
+                {
                     catalogoAux = clienteAux->GetNcatalogos();
                     catalogoAux.push_back(numero);
-                }else{
+                }
+                else
+                {
                     catalogoAux = {numero};
                 }
                 auxListado.push_back(clienteAux);
                 clienteAux->setNcatalogos(catalogoAux);
                 alquiler->agregaCliente(clienteAux);
-                clientes[clienteDni] = clienteAux;
+                //clientes[clienteDni] = clienteAux;
 
                 alquiler->SetcontadorAlquiler(auxListado.size());
                 //alquiler->SetClientes(auxListado);
+               cout<<endl<<endl<<"Se alquilo el libro a "<<endl<<*clienteAux<<endl;
 
             }
         }
-    }catch (const char* err){
+    }
+    catch (const char* err)
+    {
         throw;
     }
 }
@@ -163,9 +189,8 @@ void Biblioteca ::listarAlquilados()
             cout<<endl;
         }
 
-
-
     }
+    system("pause");
 }
 void Biblioteca::listarEjemplares(string tipo, char orden){  //tipo = tipo 'todos'->todos de ejemplar orden 'n'->Numero  't'->titulo
 
@@ -258,9 +283,56 @@ void Biblioteca::agregarCliente(Persona* _cliente){
 
     clientes.insert(pair<uint32_t, Persona*>(_cliente->Getdni(), _cliente));
 
+}
 
+void Biblioteca::agregarCliente(){
+
+    cout<<"Agregar cliente: "<<endl;
+    string nombre;
+    uint32_t dni;
+    string direccion;
+    string telefono;
+    string email;
+    uint16_t codPostal;
+    cin.ignore();
+    cout<<"Ingrese nombre completo: ";
+    getline(cin, nombre);
+    cout<<"Ingrese direccion: ";
+    getline(cin, direccion);
+    cout<<"Ingrese telefono: ";
+    getline(cin, telefono);
+    cout<<"Ingrese email: ";
+    getline(cin, email);
+    cout<<"Ingrese codigo postal: ";
+    cin>>codPostal;
+    cout<<"Ingrese DNI: ";
+    cin>>dni;
+
+    Persona* _cliente = new Persona(nombre, dni, Ubicacion(direccion, telefono, email, codPostal));
+
+    if(clientes.find(_cliente->Getdni())==clientes.end())
+    {
+        clientes.insert({_cliente->Getdni(), _cliente});
+    }
 
 }
+
+bool Biblioteca:: verDniCliente(uint32_t dni)
+{
+    map<uint32_t, Persona*>::iterator ptr;
+    ptr = clientes.find(dni);
+    if(ptr != clientes.end())
+    {
+        cout << "Cliente:  " << ptr->second->Getnombre() << endl;
+        return true;
+    }
+    else
+    {
+        cout << "Cliente no encontrado"<<endl;
+        return false;
+    }
+}
+
 
 void Biblioteca::listarEncargados()
 {
@@ -295,7 +367,7 @@ void Biblioteca::guardar(){
     cout.rdbuf(psbuf);
 
 
-    cout<<to_string(catalogo.size());
+    cout<<catalogo.size();
     for (auto it=catalogo.begin(); it!=catalogo.end(); ++it){
             (it->second->guardar());
         }
@@ -312,7 +384,7 @@ void Biblioteca::guardar(){
         if(it->second->GetcontadorAlquiler()>0) i++;
     }
 
-    cout<< to_string(i)<<endl;;
+    cout<< i<<endl;;
     for (auto it=alquileres.begin(); it!=alquileres.end(); it++){
 
             (it->second->guardar());
@@ -325,19 +397,19 @@ void Biblioteca::guardar(){
     file.open("encargados.txt");
     psbuf = file.rdbuf();
     cout.rdbuf(psbuf);
-    cout<<to_string(encargados.size())<<endl;
-    for (int i=0; i<encargados.size(); i++){
+    cout<<encargados.size()<<endl;
+    for (int i=0; i<int(encargados.size())
+    ; i++){
             (encargados[i].guardar());
         }
     cout.rdbuf(backup);
     file.close();
 
-    //cout<<clientes.at(37321654)->Getnombre()<<clientes.at(37321654)->Getdni();
     backup = cout.rdbuf();
     file.open("clientes.txt");
     psbuf = file.rdbuf();
     cout.rdbuf(psbuf);
-    cout<<to_string(clientes.size())<<endl;
+    cout<<clientes.size()<<endl;
     for (auto it=clientes.begin(); it!=clientes.end(); it++){
 
         (it->second->guardar());
@@ -507,4 +579,13 @@ void Biblioteca::cargaClientes(){
 
     file.close();
 
+}
+
+
+void Biblioteca:: clearMemoria()
+{
+    encargados.clear();
+    catalogo.clear();
+    clientes.clear();
+    alquileres.clear();
 }

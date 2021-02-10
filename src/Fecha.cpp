@@ -61,9 +61,7 @@ bool Fecha:: confFechaValida()
 
         }
 
-        else if((mes==2) && (dia>=1 || dia<=28 || 29) && (anio>=1860) &&
-                ((anio)>0) && !((anio)%4) &&
-                ( ((anio)%100) || !((anio)%400) ) )
+        else if((mes==2) && (dia>=1 || dia<= 28))
         {
 
                     return confFechaFuturo();

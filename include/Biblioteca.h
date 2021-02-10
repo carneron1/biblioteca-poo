@@ -66,6 +66,7 @@ class Biblioteca
         * @param: uint16_t : corresponde al numero de ctalogo que busco eliminar
         * @retunr: -
         */
+
         void eliminarEjemplar(uint32_t);
 
         /*! Method
@@ -130,10 +131,10 @@ class Biblioteca
 
         /*! Method
         *   Muestr ala cantidad de veces que el ejemplar fue alquiado y los clientes que elo alquilaron
-        * @param: uint32_t numero de catalogo del ejemplar
+        * @param:
         * @retunr: -
         */
-        void historialAlquileres(uint32_t _nCatalogo);
+        void historialAlquileres();
 
         /*! Method
         *   Recive un parametro de tipo Persona y lo inserta en el vector de encargados de la biblioteca
@@ -147,14 +148,17 @@ class Biblioteca
         * @param: -
         * @retunr: -
         */
-
         void agregarCliente(Persona* _cliente);
+        void agregarCliente();
+        bool verDniCliente(uint32_t dni);
 
         void listarEncargados();
         void guardar();
         void cargaEjemplares();
         void cargaEncargados();
         void cargaClientes();
+
+        void clearMemoria();
     protected:
 
     private:

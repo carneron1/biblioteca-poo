@@ -1,4 +1,4 @@
-5
+9
 1
 1
 2021
@@ -10,6 +10,28 @@ ESP
 156
 Maxi C
 Medicina
+17
+10
+2017
+Revista
+Muy Interesante
+8
+muy int
+esep
+0
+1
+1234151
+2
+3
+2010
+Dvd
+127hrs
+9
+univ
+ingles
+234
+accion
+no
 11
 11
 2002
@@ -21,6 +43,31 @@ ING
 1
 uno
 asd987ttyu
+3
+4
+2002
+Dvd
+The notebook
+11
+warnwe
+ing
+341
+remance
+no
+1
+1
+2013
+Libro
+La casa de los Espiritus
+12
+sudamericana
+esp
+353
+Isabel Allende
+35135
+chile
+Realismo fantstico
+blanda
 10
 10
 2001

@@ -80,6 +80,14 @@ void Alquiler:: infoAlquiler()
     cout<< this<<endl;
 }
 
+void Alquiler:: agregaCliente(Persona* _cliente)
+{
+
+    clientes.push_back(_cliente);
+}
+
+
+
 ostream& operator<<(ostream& os, Alquiler& a)
 {
     Persona* cliente = a.GetClientes().back();
@@ -95,7 +103,7 @@ ostream& Alquiler::guardar(){
     if(clientes.size()>0){
 
         ostream &os = ultimoEncargado.guardar();
-        os<<to_string(contadorAlquiler);
+        os<<contadorAlquiler;
         //string nombre;
         //uint32_t dni;
 

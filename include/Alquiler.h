@@ -35,7 +35,7 @@ class Alquiler
         friend ostream& operator<<(ostream& os, const Alquiler& a);
         ostream& guardar();
 
-        void agregaCliente(Persona * _cliente) { clientes.push_back(_cliente);}
+        void agregaCliente(Persona* _cliente);
 
     protected:
 

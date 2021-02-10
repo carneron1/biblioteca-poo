@@ -31,7 +31,6 @@ void Menu:: preMenu()
     bib->cargaEncargados();
     bib->cargaEjemplares();
     bib->cargaClientes();
-    //bib->alquilerEjemplar(111,true,Fecha(10,10,2001),37321654, Persona("Encargado", 37321654, Ubicacion("luro 118", "2235918544", "maxi@c.com", 7609)));
     int aux;
     bib->listarEncargados();
     Persona pAux;
@@ -43,8 +42,6 @@ void Menu:: preMenu()
         {
             pAux= bib->getEncargado(aux);
             bib->SetEncargadoActual(pAux);
-            limpiarPantalla();
-            cout<<"BIENVENIDO/A "<<pAux.Getnombre()<<endl;
 
         }
         else
@@ -54,14 +51,13 @@ void Menu:: preMenu()
 
     }
     while (aux > bib->getCantEncargados()-1);
-            system("pause");
     limpiarPantalla();
 }
 
-void Menu:: menuPrincipal()
+bool Menu:: menuPrincipal()
 {
     limpiarPantalla();
-
+    bool salida;
     int opcion=0;
 	while (opcion != 7)
 	{
@@ -80,7 +76,8 @@ void Menu:: menuPrincipal()
         cout << "    2: Listar Ejemplares" << endl;
         cout << "    3: Opciones Ejemplares" << endl;
         cout << "    4. Opciones Biblioteca" << endl<<endl;
-        cout << "    7: Salir" << endl;
+        cout << "    6: Cambiar Encargado" << endl;
+        cout << "    7: Salir del programa" << endl;
 
         cin >> opcion;
         cout << endl;
@@ -103,7 +100,8 @@ void Menu:: menuPrincipal()
 			break;
 
 		case 3:
-
+            limpiarPantalla();
+		    cout << "3. Menu de Ejemplares: " << endl;
 		    menuEjemplares();
 
 			break;
@@ -111,12 +109,16 @@ void Menu:: menuPrincipal()
 		case 4:
 
 		    limpiarPantalla();
+		    cout<< "4. Menu Biblioteca: "<<endl;
 		    menuBiblioteca();
 
 			break;
-
+        case 6:
+            opcion = 7;
+            salida =false;
+            break;
         case 7:
-            limpiarPantalla();
+            salida= true;
             break;
 		default:
 			cout << "Opcion Invalida" << endl;
@@ -126,76 +128,76 @@ void Menu:: menuPrincipal()
 
 	}
     bib->guardar();
-
+    return salida;
 }
 
+void Menu:: limpiarMemoria()
+{
+    bib->clearMemoria();
+    limpiarPantalla();
+}
 
 void Menu::menuAlquileres()
 {
     uint16_t opcion=0;
-
-    while (opcion != 8)
+    try
     {
-        limpiarPantalla();
-        cout << "\nSeleccione una opcion:\n\n";
-        cout << "    1: Alquiler de un Ejemplar" << endl;
-        cout << "    2: Listar Alquilados" << endl;
-        cout << "    3: Historial ejemplar" << endl<< endl;
-
-        cout << "    8: volver" << endl;
-
-        cin >> opcion;
-        cout << endl;
-        switch (opcion)
+        while (opcion != 8)
         {
-        case 1:
-
             limpiarPantalla();
-            alquilerEjemplar();
+            cout << "\nSeleccione una opcion:\n\n";
+            cout << "    1: Alquiler de un Ejemplar" << endl;
+            cout << "    2: Listar Alquilados" << endl;
+            cout << "    3: Historial Ejemplar" << endl<< endl;
+
+            cout << "    8: volver" << endl;
+
+            cin >> opcion;
+            cout << endl;
+            switch (opcion)
+            {
+            case 1:
+
+                limpiarPantalla();
+                alquilerEjemplar();
 
 
-            break;
-        case 2:
+                break;
+            case 2:
 
-            limpiarPantalla();
-            listadoAlquilados();
-            break;
+                limpiarPantalla();
+                bib->listarAlquilados();
 
-        case 3:
-            limpiarPantalla();
-            uint32_t nCat;
-            cout<<"Ingrese numero de catalogo: ";
-            cin>>nCat;
-            try{
-                bib->historialAlquileres(nCat);
-            }catch ( const char * e){
-                cout<<e<<endl;
-            };
+                break;
+
+            case 3:
+                limpiarPantalla();
+                bib->historialAlquileres();
 
 
-            break;
-        case 8:
+                break;
+            case 8:
 
-            limpiarPantalla();
+                limpiarPantalla();
 
 
-            break;
+                break;
 
-        default:
-            cout << "Opcion Invalida" << endl;
+            default:
+                cout << "Opcion Invalida" << endl;
 
-            break;
+                break;
+            }
+
         }
-        system("pause");
-
-
     }
+    catch ( const char * e)
+    {
+        cout<<e<<endl;
+    };
 
 }
-void Menu:: listadoAlquilados()
-{
-    bib->listarAlquilados();
-}
+
 void Menu::alquilerEjemplar()
 {
     bool auxbool;
@@ -204,6 +206,7 @@ void Menu::alquilerEjemplar()
     cout<<"Numero de catalogo"<<endl;
     cin>>nC;
     try{
+        //en vencimiento de alquiler verifico si se alquilo y si esta vencido
         auxbool= bib->vencimientoAlquiler(nC);
         if(auxbool==true)  //si se encuentra alquilado
         {
@@ -264,13 +267,14 @@ void Menu:: subMenuAlquileres1(uint32_t numCatalogoAux)// si el libro esta alqui
 void Menu:: subMenuAlquileres2(uint32_t nC)// si el libro no esta alquilado
 {
     int aux;
+    uint32_t dni;
     Persona cliente;
     Fecha fechaaux;
-    bool confFecha= true;
+    bool conf= true;
     do
     {
         cout<<endl<<endl;
-        cout<<"1:Alquilar"<<endl;
+        cout<<"1: Alquilar"<<endl;
         cout<<"8: Volver"<<endl;
         cin>>aux;
         switch (aux)
@@ -278,24 +282,33 @@ void Menu:: subMenuAlquileres2(uint32_t nC)// si el libro no esta alquilado
         case 1:
 //            cout<<"Ingrese nombre de cliente: "<<endl;
 //            cin>>cliente;
-            cout<<"Ingrese fecha del alquiler (FORMATO dd/mm/aa) :"<<endl;
+            cout<<"Ingrese fecha del alquiler (FORMATO dd/mm/aaaa) :"<<endl;
             do
             {
             cin>>fechaaux;
             if (fechaaux.confFechaValida()==false)
             {
                 cout<<endl<<"intente denuevo: ";
-                confFecha=false;
+                conf=false;
             }else
             {
-                confFecha =true;
+                conf =true;
             }
-            } while (confFecha==false);
+            } while (conf==false);
 
 
 
-            bib->alquilerEjemplar(nC,true,fechaaux, 37321654, bib->Getencargados().back());
-            cout<<endl<<endl<<"Se alquilo el libro a :"<<cliente<<endl;
+            cout<< "Ingrese el DNI del cliente: "<<endl;
+            cin>> dni;
+            conf = bib->verDniCliente(dni);
+            if (conf == false)
+            {
+                subMenuAlquileres2(nC);
+            }
+            else
+            {
+                bib->alquilerEjemplar(nC,true,fechaaux, dni, bib->Getencargados().back());
+            }
             break;
         case 8:
             cout<< "volviendo"<<endl;
@@ -315,7 +328,6 @@ void Menu::menuEjemplares()
     uint32_t n;
     while (opcion != 8)
     {
-        limpiarPantalla();
         cout << "\nSeleccione una opcion:\n\n";
         cout << "    1: Ingresar ejemplar" << endl;
         cout << "    2: Eliminar ejemplar" << endl;
@@ -360,7 +372,7 @@ void Menu::menuEjemplares()
             cin.ignore();
             try{
                 bib->imprimir(n);
-
+                system("pause");
             }catch(const char *e){
                 cout<<e<<endl;
             }
@@ -375,10 +387,10 @@ void Menu::menuEjemplares()
 
         default:
             cout << "Opcion Invalida" << endl;
-
+            system("pause");
             break;
         }
-        system("pause");
+
 
 
     }
@@ -495,9 +507,6 @@ void Menu::menuListado()
 
         }
 
-
-
-
     }
 
 }
@@ -588,7 +597,8 @@ Libro* Menu:: ingresarLibro()
         cout<<"Titulo: ";
         getline(cin, titulo);
         cout<<endl;
-        cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
+        cout<<"Numero de catalogo:  ";
+        //cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
         cin>>numCatalogo;
         cout<<endl;
         cin.ignore();
@@ -636,14 +646,15 @@ Revista* Menu:: ingresarRevista()
         cout<<endl;
         cout<<"Referato? (s)i - (n)o: ";
         cin>>refChar;
-        if(refChar=='s') referato = true;
+        if(toupper(refChar)=='S') referato = true;
         else referato = false;
         cout<<endl;
         cin.ignore();
         cout<<"Titulo: ";
         getline(cin, titulo);
         cout<<endl;
-        cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
+        cout<<"Numero de catalogo: ";
+        //cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
         cin>>numCatalogo;
         cout<<endl;
         cin.ignore();
@@ -694,7 +705,8 @@ Dvd* Menu:: ingresarDvd()
         cout<<"Titulo: ";
         getline(cin, titulo);
         cout<<endl;
-        cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
+        cout<<"Numero de catalogo: ";
+        //cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
         cin>>numCatalogo;
         cout<<endl;
         cin.ignore();
@@ -749,7 +761,8 @@ Apunte * Menu:: ingresarApunte()
         cout<<"Titulo: ";
         getline(cin, titulo);
         cout<<endl;
-        cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
+        cout<<"Numero de catalogo: ";
+        //cout<<"Numero de catalogo (recomendado: "<<bib->GetcantEjemplares()+1 <<"): ";
         cin>>numCatalogo;
         cout<<endl;
         cin.ignore();
@@ -788,6 +801,7 @@ void Menu::menuBiblioteca()
         cout << "    1: Modificar nombre" << endl;
         cout << "    2: Modificar ubicacion" << endl;
         cout << "    3: Agregar encargado" << endl;
+        cout << "    4: Agregar Cliente "<<endl;
 
         cout << "    8: volver" << endl;
 
@@ -814,6 +828,9 @@ void Menu::menuBiblioteca()
             agregarEncargado();
 
             break;
+        case 4:
+
+            bib->agregarCliente();
 
         case 8:
 
@@ -827,8 +844,6 @@ void Menu::menuBiblioteca()
 
             break;
         }
-        system("pause");
-
 
     }
 
@@ -888,7 +903,6 @@ void Menu::agregarEncargado(){
     bib->agregarEncargado(Persona(nombre, dni, Ubicacion(direccion, telefono, email, codPostal)));
 
 }
-
 
 
 
